@@ -12,7 +12,7 @@ class Sprite{
         this.gravity = .01;
         this.dx = 0;
         this.dy = 0;
-        this.jumpSpeed = -2.5;
+        this.jumpSpeed = -2;
         this.img = new Image();
         this.img.src = this.path;
         this.ground = false;
@@ -43,30 +43,44 @@ class Sprite{
         //https://www.siyavula.com/read/za/physical-sciences/grade-10/motion-in-one-dimension/21-motion-in-one-dimension-07
         
         const deltaTime = 3;
+        this.dx = (this.speedX*this.lastDirection)*deltaTime       
+
         if (!this.ground){
             this.dy = this.speedY*deltaTime+1/2*this.gravity*Math.pow(deltaTime,2)
             this.y+=this.dy
             this.speedY += this.gravity*deltaTime;
+
+            if (direction=="a"){
+                this.lastDirection = -1
+                this.x += this.dx*0.5
+            }else if(direction=="d"){
+                this.lastDirection = 1
+                this.x += this.dx*0.5
+
+            }else if (direction=="s"){
+                this.speedY=2
+            }else{
+                this.x+=this.dx*0.3
+            }
+            
+            return;
         }else{
             this.speedY=1.2
         }
 
-        this.dx = (this.speedX*this.lastDirection)*deltaTime       
 
         if (direction=="w"){
             this.speedY = this.jumpSpeed;
             this.dy = this.speedY*deltaTime+1/2*this.gravity*Math.pow(deltaTime,2)
             this.y+=this.dy
-            this.x+=this.dx
         }else if (direction=="a"){
             this.lastDirection = -1
             this.x+=this.dx
-
         }else if(direction=="d"){
             this.lastDirection = 1
             this.x+=this.dx
         }
-        this.speedX =5;
+        this.speedX = 5;
     }
 
 
