@@ -2,16 +2,28 @@
     <head>
         <title>Wand</title>
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/game.css">
+
+
+        <script src="js/objects/powerup.js" defer></script>
+        <script src="js/objects/platform.js" defer></script>
+        <script src="js/objects/sprite.js" defer></script>
+        <script src="js/objects/hotbar.js" defer></script>
+
+
+        <script src="js/index.js" defer></script>
+        <script src="js/client.js" defer></script>
+        <script src="js/levelHandler.js" defer></script>
+
+        <script src="/socket.io/socket.io.js"></script>
+
     </head>
     <body id="body">
-        <h1>Welcome to the game</h1>
+        <h1 id="gameHeader">Welcome to the game</h1>
         <section id="mainContent">
-            <form action="/lobby/submit" method="post">
-                <input type="lobby" name="id">
-                <button type="submit">Submit</button>
-            </form>
+            <input type="lobby" id="roomCode">
+            <button type="submit" id="joinlobby">Join</button>
             <button id="createLobby">Create lobby</button>
-            <button onclick="location.href = 'lobby.html';" id="temp">Go to game</button>
         </section>
     </body>
 </html>
