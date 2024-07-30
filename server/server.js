@@ -73,16 +73,10 @@ module.exports = function(io) {
                 let playerInfo = {
                     myCharacterNum:i
                 }
+                //send to specific socket
                 io.to(roomToSend.players[i]).emit("recievePlayerInfo",playerInfo);
             }
         })
-
-
-        socket.on("startGameUpdatePlayer",(roomCode,playerID)=>{
-            console.log(roomCode,playerID);
-        });
       });
-
-
 
 };

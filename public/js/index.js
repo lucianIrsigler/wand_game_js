@@ -1,3 +1,12 @@
+/*
+Author: Lucian Irsigler
+Date: 2024/07/30
+
+This file is responsible for the index.html page. It will handle the creation of lobbies and joining of lobbies.
+It will also display the players in the lobby and the room code.
+The game will start when the host clicks on the "Start Game" button.
+*/
+
 let roomCodeInput = document.getElementById("roomCode");
 let createLobbyButton = document.getElementById("createLobby");
 let joinLobbyButton = document.getElementById("joinlobby");
@@ -38,7 +47,8 @@ function hideIndexElements(){
     joinLobbyButton.style.display = "none";
 }
 
-function addElements(){
+// Create lobby information
+function addLobbyInformation(){
     const header = document.createElement("h1");
     header.textContent = "Lobby";
     header.id = "lobbyHeader";
@@ -60,19 +70,35 @@ function addElements(){
     ul = document.getElementById("playerList");
 }
 
+function createStartGameButton(){
+    let temp = document.createElement("button");
+    temp.textContent = "Start Game";
+    temp.id = "startGame";
+    document.body.appendChild(temp);
+
+    startGameButton = document.getElementById("startGame");
+
+    startGameButton.addEventListener("click",()=>{
+        socket.emit("startGame",roomID);
+    })
+}
+
+
+// Update the list of players in the lobby
 function updateList(newInfo){
+    //if ul is undefined at this point, then user didnt click on "create lobby" function, thus must be a joiner
     if (ul==undefined){
         host = false;
         hideIndexElements()
-        addElements();
+        addLobbyInformation();
     }
 
     //remove all li
     while(ul.firstChild){
         ul.removeChild(ul.firstChild);
-      }
+    }
 
-    console.log(newInfo);
+    // add players
     for (let i = 0; i < newInfo.players.length; i++){
         let player = newInfo.players[i];
         let li = document.createElement("li");
@@ -86,26 +112,14 @@ function updateList(newInfo){
 createLobbyButton.addEventListener("click", ()=>{
     host = true;
     socket.emit("createLobby");
-    //hide stuff
+
     hideIndexElements();
-
-    
-    addElements();
-    // create start game button
-    let temp = document.createElement("button");
-    temp.textContent = "Start Game";
-    temp.id = "startGame";
-    document.body.appendChild(temp);
-
-    startGameButton = document.getElementById("startGame");
-
-    startGameButton.addEventListener("click",()=>{
-        socket.emit("startGame",roomID);
-    })
+    addLobbyInformation();
+    createStartGameButton();
 })
 
+// Join lobby
 joinLobbyButton.addEventListener("click", ()=>{
-    console.log(roomID)
     let roomCode = roomCodeInput.value;
     socket.emit("joinLobby",roomCode);
 })

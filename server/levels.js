@@ -124,34 +124,6 @@ const levels = {
     }
 }
 
-// function getLevel(levelToReturn,canvasHeight,canvasWidth){
-//     prevWidth = globalWidth;
-//     prevHeight = globalHeight;
-
-//     globalHeight = canvasHeight;
-//     globalWidth = canvasWidth;
-
-//     let level = levels[levelToReturn];
-
-//     level.platformInfo.forEach((element,i)=>{
-//         if(element.horizontal && element.width == prevWidth){
-//             element.width = globalWidth;
-//         }else if (element.height == prevHeight){
-//             element.height = globalHeight;
-//         }
-//     });
-
-//     level.platformLocations.forEach((element,i)=>{
-//         if(element.x == prevWidth){
-//             element.x = globalWidth;
-//         }else if(element.y == prevHeight){
-//             element.y = globalHeight;
-//         }
-//     });
-
-
-//     return levels[levelToReturn];
-// }
 
 function getLevel(levelToReturn){
     let level = levels[levelToReturn];

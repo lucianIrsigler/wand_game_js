@@ -5,7 +5,6 @@ var ctx = canvas.getContext("2d");
 const gravity = 2;
 let prevDirection = null;
 
-
 //Event listeners
 addEventListener('keypress',(event)=>{
     if (event.key=='w' ||event.key=="d"||event.key=="a"||event.key=="s"){
@@ -20,11 +19,6 @@ addEventListener('keydown',(event)=>{
         prevDirection = event.key
     }
 })
-
-
-addEventListener('mousedown',(event)=>{
-})
-
 
 //Collision detection
 function boxCollision(object1,object2){

@@ -15,17 +15,9 @@ app.get("/",(req,res)=>{
     res.sendFile("public/index.html")
 })
 
-app.get("/game",(req,res)=>{
-    res.sendFile("game.html",{root:"public"})
-})
-
-
-
-
 require('./server/server.js')(io);
 
-
-PORT = 3000
+PORT = 3000 || process.env.PORT
 server.listen(PORT,()=>{
     console.log("server running at http://localhost:3000")
 })
